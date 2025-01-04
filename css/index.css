@@ -1,11 +1,28 @@
+#body_wrapper {
+    background-color: rgba(252, 252, 252, 0.829);
+    align-self: center;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#banner_heading {
+    align-content: center;
+    text-align: center;
+}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-td,
 th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
