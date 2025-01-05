@@ -21,15 +21,29 @@ table {
 th {
     border: 1px solid #dddddd;
     text-align: center;
-    padding: 8px;
+    padding: 6px;
+    text-decoration: bold;
+}
+
+th.tech {
+    width: 25%;
+}
+
+th.topics {
+    width: 75%;
 }
 
 td {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    overflow: hidden;
+    padding: 6px;
 }
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+li {
+    padding: 3px;
 }
