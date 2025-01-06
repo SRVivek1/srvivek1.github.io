@@ -198,8 +198,8 @@
 <li>
 <p><strong><ins>Purpose / Feature</ins></strong></p>
 <ul>
-<li>Spring Cloud Config provides server-side and client-side support for externalized configuration in a distributed system.</li>
-<li>With the Config Server, we have a central place to manage external properties for applications across all environments.</li>
+<li>Spring Cloud Config provides server-side and client-side support to externalize application configuration in a distributed system.</li>
+<li>With the Config Server, we have a central place to manage external properties / configuration for all applications across all environments.</li>
 </ul>
 </li>
 <li>
@@ -207,7 +207,11 @@
 <ul>
 <li><em><strong>Step-1:</strong></em> Git Repo setup
 <ul>
-<li>Create a new git repo (local or github)</li>
+<li>Create a new git repo either a local or create a reposirty on <a href="http://github.com">Github.com</a>
+<ul>
+<li><strong>Local git initialization:</strong> <em>git init</em></li>
+</ul>
+</li>
 <li>Add required properties files using microservice name - <code>&lt;microservice-name&gt;[-&lt;env&gt;].properties</code></li>
 </ul>
 </li>
@@ -226,7 +230,7 @@
 <li>Add <code>spring.cloud.config.server.git.uri=https://github.com/SRVivek1/spring-cloud-config-server-git-repo.git</code></li>
 </ul>
 </li>
-<li><em><strong>Step-5:</strong></em> Git URLs for different setups
+<li><em><strong>Step-5:</strong></em> Git URLs for different platforms
 <ul>
 <li><strong>Linux:</strong> <em>file:///path/to/git/directory</em></li>
 <li><strong>Windows:</strong> <em>file:///c:/path/to/git/directory</em></li>
@@ -249,26 +253,24 @@
 <li>
 <p><strong><ins>Code changes</ins></strong></p>
 <ul>
-<li>B2SbootCloudConfigServerApplication.java main app.
+<li><strong>B2SbootCloudConfigServerApplication.java</strong> main app.
 <ul>
 <li>imports
 <ul>
 <li><code>import org.springframework.cloud.config.server.EnableConfigServer;</code></li>
-<li>Config server is enabled by adding annotation on main app.<pre><code class="language-java">	<span class="hljs-comment">/* Enable config server. */</span>
+</ul>
+</li>
+<li>Config server is enabled by adding annotation on main app.</li>
+</ul>
+<pre><code class="language-java">	<span class="hljs-comment">/* Enable config server. */</span>
 	<span class="hljs-meta">@EnableConfigServer</span> 
 	<span class="hljs-meta">@SpringBootApplication</span>
 	<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">B2SbootCloudConfigServerApplication</span> {
-
 		<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
 			SpringApplication.run(B2SbootCloudConfigServerApplication.class, args);
 		}
-
 	}
 </code></pre>
-</li>
-</ul>
-</li>
-</ul>
 </li>
 <li><strong>application.properties</strong><pre><code class="language-properties">	<span class="hljs-attr">spring.application.name</span>=<span class="hljs-string">b2-sboot-cloud-config-server</span>
 <span class="hljs-comment">
@@ -281,30 +283,39 @@
 	<span class="hljs-attr">spring.cloud.config.server.git.uri</span>=<span class="hljs-string">https://github.com/SRVivek1/spring-cloud-config-server-git-repo.git</span>
 <span class="hljs-comment">
 	# local git</span>
-<span class="hljs-comment">	#spring.cloud.config.server.git.uri=file:///home/srvivek/wrkspace/spring-cloud-config-server-git-repo</span>
+<span class="hljs-comment">	#spring.cloud.config.server.git.uri=file:///path/to/git/spring-cloud-config-server-git-repo</span>
 <span class="hljs-comment">
 	# windows</span>
-<span class="hljs-comment">	#spring.cloud.config.server.git.uri=file:///c:/wrkspace/spring-cloud-config-server-git-repo</span>
+<span class="hljs-comment">	#spring.cloud.config.server.git.uri=file:///c:/path/to/git/spring-cloud-config-server-git-repo</span>
 <span class="hljs-comment">
 	# End: Git repo config</span>
 </code></pre>
 </li>
 <li><strong>Git repo</strong>
 <ul>
-<li>In git repo, create propertie file using microervice name - <code>&lt;microservice-name&gt;[-&lt;env&gt;].properties</code> in the base directory.<pre><code class="language-properties">	<span class="hljs-attr">./limits-service-prod.properties</span>
-	<span class="hljs-attr">./limits-service-dev.properties</span>
+<li>In git repo, create propertie file using microervice name - <code>&lt;microservice-name&gt;[-&lt;env&gt;].properties</code> in the base directory.<pre><code class="language-properties"><span class="hljs-comment">	# limits-service properties for differnt environments</span>
 	<span class="hljs-attr">./limits-service.properties</span>
+	<span class="hljs-attr">./limits-service-dev.properties</span>
 	<span class="hljs-attr">./limits-service-qa.properties</span>
+	<span class="hljs-attr">./limits-service-prod.properties</span>
+<span class="hljs-comment">
+	# currency-exchange-service default property</span>
 	<span class="hljs-attr">./currency-exchange-service.properties</span>
-
 </code></pre>
 </li>
-<li>Content<pre><code class="language-properties">	<span class="hljs-attr">limits-service.properties</span>:<span class="hljs-string">limits-service.minimum=8</span>
+<li>Content of the properties<pre><code class="language-properties"><span class="hljs-comment">	# properties in limit-service default properties</span>
+	<span class="hljs-attr">limits-service.properties</span>:<span class="hljs-string">limits-service.minimum=8</span>
 	<span class="hljs-attr">limits-service.properties</span>:<span class="hljs-string">limits-service.maximum=888</span>
+<span class="hljs-comment">	
+	# properties in limit-service DEV properties</span>
 	<span class="hljs-attr">limits-service-dev.properties</span>:<span class="hljs-string">limits-service.minimum=1</span>
 	<span class="hljs-attr">limits-service-dev.properties</span>:<span class="hljs-string">limits-service.maximum=111</span>
+<span class="hljs-comment">
+	# properties in limit-service QA properties</span>
 	<span class="hljs-attr">limits-service-qa.properties</span>:<span class="hljs-string">limits-service.minimum=3</span>
 	<span class="hljs-attr">limits-service-qa.properties</span>:<span class="hljs-string">limits-service.maximum=333</span>
+<span class="hljs-comment">	
+	# properties in limit-service PROD properties</span>
 	<span class="hljs-attr">limits-service-prod.properties</span>:<span class="hljs-string">limits-service.minimum=6</span>
 	<span class="hljs-attr">limits-service-prod.properties</span>:<span class="hljs-string">limits-service.maximum=666</span>
 </code></pre>
