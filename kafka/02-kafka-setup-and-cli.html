@@ -456,7 +456,8 @@
 <hr>
 <h2 id="4-kafka-console-producer---kafka-console-producersh">4. Kafka Console Producer - <em><a href="http://kafka-console-producer.sh">kafka-console-producer.sh</a></em></h2>
 <ul>
-<li><strong><ins>About / Introduction</ins></strong>
+<li>
+<p><strong><ins>About / Introduction</ins></strong></p>
 <ul>
 <li>Produce data using <em><a href="http://kafka-console-producer.sh">kafka-console-producer.sh</a></em> executable/script.</li>
 <li><strong>Typical kafka console producer</strong><center>
@@ -465,7 +466,8 @@
 </li>
 </ul>
 </li>
-<li><strong><ins>Steps</ins></strong>
+<li>
+<p><strong><ins>Steps</ins></strong></p>
 <ul>
 <li><em><strong>Project Setup:</strong></em> <em>Zookeeper</em> and at least one <em>Kafka server</em> must be running.</li>
 <li><em><strong>Step-1:</strong></em> Push message to topic using CLI <em><a href="http://kafka-console-producer.sh">kafka-console-producer.sh</a></em>
@@ -504,14 +506,33 @@
 </li>
 </ul>
 </li>
+<li><em><strong>Step-4</strong></em> Produce data to all partitions with RoundRobin mechanism.
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-producer.sh">kafka-console-producer.sh</a> --bootstrap-server [::1]:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic first_topic</em></li>
+<li><strong>Paritioner property:</strong>
+<ul>
+<li><em>org.apache.kafka.clients.producer.RoundRobinPartitioner</em> class explicity specifies partitioning strategy to distribute the messages if there's more than one parititon.</li>
+</ul>
+</li>
+<li><strong>Note:</strong>
+<ul>
+<li>Do not use in <em>PRODUCTION</em> environment, it's one of the most inefficient Partitioning stretegy.</li>
 </ul>
 </li>
 </ul>
-<blockquote>
-<p>Note: Press <em><strong>Ctrl + C</strong></em> to exit the console.</p>
-</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Note:</strong></p>
 <ul>
-<li><strong><ins>All Commands:</ins></strong><pre><code class="language-sh">    <span class="hljs-comment">############################</span>
+<li>Press <em><strong>Ctrl + C</strong></em> to exit the console.</li>
+<li>We must create topics with the appropriate number of partitions before producing to them.</li>
+</ul>
+</li>
+<li>
+<p><strong><ins>All Commands:</ins></strong></p>
+<pre><code class="language-sh">    <span class="hljs-comment">############################</span>
     <span class="hljs-comment">#####     LOCALHOST    #####</span>
     <span class="hljs-comment">############################</span>
 
@@ -547,7 +568,6 @@
 
     <span class="hljs-comment"># edit config/server.properties or config/kraft/server.properties</span>
     <span class="hljs-comment"># num.partitions=3</span>
-
     <span class="hljs-comment"># produce against a non existing topic again</span>
     kafka-console-producer.sh --bootstrap-server [::1]:9092 --topic new_topic_2
     hello again!
@@ -556,27 +576,323 @@
     kafka-topics.sh --bootstrap-server [::1]:9092 --list
     kafka-topics.sh --bootstrap-server [::1]:9092 --topic new_topic_2 --describe
 
-    <span class="hljs-comment"># overall, please create topics with the appropriate number of partitions before producing to them!</span>
-
-    <span class="hljs-comment"># produce with keys</span>
+    <span class="hljs-comment"># produce messages with keys</span>
     kafka-console-producer.sh --bootstrap-server [::1]:9092 --topic first_topic --property parse.key=<span class="hljs-literal">true</span> --property key.separator=:
     &gt;key1:value1
     &gt;name:srvivek
 </code></pre>
 </li>
-<li><strong><ins>Notes:</ins></strong>
+<li>
+<p><strong><ins>References:</ins></strong></p>
 <ul>
-<li>Some important key point / takeaway note.</li>
-<li>Some takeaway:
-<ul>
-<li>Sub topic takeaway.</li>
+<li><a href="https://learn.conduktor.io/kafka/kafka-producer-cli-tutorial/">https://learn.conduktor.io/kafka/kafka-producer-cli-tutorial/</a></li>
+<li><a href="https://www.javatpoint.com/sending-data-to-kafka-topics">https://www.javatpoint.com/sending-data-to-kafka-topics</a></li>
+<li><a href="https://docs.confluent.io/kafka/operations-tools/kafka-tools.html">https://docs.confluent.io/kafka/operations-tools/kafka-tools.html</a></li>
 </ul>
 </li>
 </ul>
+<hr>
+<h2 id="5-kafka-console-consumer-kafka-console-consumersh">5. Kafka Console Consumer <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a></em></h2>
+<ul>
+<li><strong><ins>About / Introduction</ins></strong>
+<ul>
+<li>Consume data using <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a></em> executable/script.</li>
+<li><strong>Typical kafka consumers</strong><center>
+  <img src="./images/kafka-console-consumer.png" alt="Typical kafka consumer" title="Typical kafka consumer" width="700" height="270"/>
+</center>
+</li>
+</ul>
+</li>
+<li><strong><ins>Steps</ins></strong>
+<ul>
+<li><em><strong>Project Setup:</strong></em> <em>Zookeeper</em> and at least one <em>Kafka server</em> must be running.</li>
+<li><em><strong>Step-1:</strong></em> Create topic if doesn't exist and produce message to the topic.
+<ul>
+<li><em>Check section-4 for kafka producer and commands.</em></li>
+</ul>
+</li>
+<li><em><strong>Step-2:</strong></em> Kafka consumer to consume message.
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic first_topic</em></li>
+</ul>
+</li>
+<li><em><strong>Step-3:</strong></em> Consume message from beginning
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic first_topic --from-beginning</em></li>
+<li><strong>Note:</strong>
+<ul>
+<li>The message ordering will not be same as produced as messages will be read from all partitions independently.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em><strong>Step-4:</strong></em> Consume message and print message metadata (from beginning)
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic first_topic --formatter org.apache.kafka.tools.consumer.DefaultMessageFormatter --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --from-beginning</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><ins>All Commands</ins></strong><pre><code class="language-sh">    <span class="hljs-comment">############################</span>
+    <span class="hljs-comment">#####     LOCALHOST    #####</span>
+    <span class="hljs-comment">############################</span>
+
+    <span class="hljs-comment"># create a topic with 3 partitions</span>
+    kafka-topics.sh --bootstrap-server [::1]:9092 --topic first_topic --create --partitions 3
+
+    <span class="hljs-comment"># consuming new messages</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic first_topic
+
+    <span class="hljs-comment"># producing other terminal</span>
+    <span class="hljs-comment"># RoundRobin to all partitions</span>
+    kafka-console-producer.sh --bootstrap-server [::1]:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic first_topic
+
+    <span class="hljs-comment"># consuming messages from beginning</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic first_topic --from-beginning
+
+    <span class="hljs-comment"># consume messages and display key, values and timestamp in consumer</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic first_topic --formatter org.apache.kafka.tools.consumer.DefaultMessageFormatter --property print.timestamp=<span class="hljs-literal">true</span> --property print.key=<span class="hljs-literal">true</span> --property print.value=<span class="hljs-literal">true</span> --property print.partition=<span class="hljs-literal">true</span> --from-beginning
+</code></pre>
 </li>
 <li><strong><ins>References:</ins></strong>
 <ul>
-<li><a href="https://github.com/springdoc/springdoc-openapi/blob/main/springdoc-openapi-starter-webmvc-ui/pom.xml">https://github.com/springdoc/springdoc-openapi/blob/main/springdoc-openapi-starter-webmvc-ui/pom.xml</a></li>
+<li><a href="https://learn.conduktor.io/kafka/kafka-consumer-cli-tutorial/">https://learn.conduktor.io/kafka/kafka-consumer-cli-tutorial/</a></li>
+<li><a href="https://www.javatpoint.com/kafka-console-consumer">https://www.javatpoint.com/kafka-console-consumer</a></li>
+<li><a href="https://docs.confluent.io/kafka/operations-tools/kafka-tools.html">https://docs.confluent.io/kafka/operations-tools/kafka-tools.html</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-kafka-console-consumer-in-gropus-kafka-console-consumersh">6. Kafka Console Consumer in Gropus <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a></em></h2>
+<ul>
+<li><strong><ins>About / Introduction</ins></strong>
+<ul>
+<li>Consume data using <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a></em> executable/script in consumer groups.</li>
+<li><strong>Note:</strong>
+<ul>
+<li>If consumers are less then partitions, then consumers can read from more than one parition.</li>
+<li>If consumers are more than parititions, then other consumers will be idle and will not consume data.</li>
+</ul>
+</li>
+<li><strong>Typical kafka consumers</strong><center>
+  <img src="./images/kafka-console-consumer-groups.png" alt="Typical kafka consumer groups" title="Typical kafka consumer groups" width="650" height="270"/>
+</center>
+</li>
+</ul>
+</li>
+<li><strong><ins>Steps</ins></strong>
+<ul>
+<li><em><strong>Project Setup:</strong></em> <em>Zookeeper</em> and at least one <em>Kafka server</em> must be running.</li>
+<li><em><strong>Step-1:</strong></em> Create new topic if doesn't exist or have 1 partition and produce message to the topic.
+<ul>
+<li><em>Check section-4 for kafka producer and commands.</em></li>
+</ul>
+</li>
+<li><em><strong>Step-2:</strong></em> Kafka consumer to consume message in group
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic third_topic --group my-first-application</em></li>
+<li><strong>Note:</strong>
+<ul>
+<li>If we will not provide the <em>--group xxxx</em> then a temproary consumer group is cretaed to consume the message and auto-removed later.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em><strong>Step-3:</strong></em> Cretea another kafka consumer in same group
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic third_topic --group my-first-application</em></li>
+<li><strong>Note:</strong>
+<ul>
+<li>If no consumers were up and we start the first consumer, it will read all unread/new the messages.</li>
+<li>We can have any number of consumers.
+<ul>
+<li>But one partition can read by only one consumer while a single consumer can read from multiple partitions, in case if consumers count is less then paritions count.</li>
+<li>If there are more consumers then other will be idle and will not consume any messsage.</li>
+</ul>
+</li>
+<li>The message ordering will not be same as produced as messages will be read from all partitions independently.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em><strong>Step-4:</strong></em> Consume message in group and print message metadata
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic third_topic --formatter org.apache.kafka.tools.consumer.DefaultMessageFormatter --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --group my-first-application</em></li>
+</ul>
+</li>
+<li><em><strong>Step-5:</strong></em> To read message from beginning, we need to create a new group <em>my-second-application</em> for the topic.
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-console-consumer.sh">kafka-console-consumer.sh</a> --bootstrap-server [::1]:9092 --topic third_topic --formatter org.apache.kafka.tools.consumer.DefaultMessageFormatter --property print.timestamp=true --property print.key=true --property print.value=true --property print.partition=true --group my-second-application --from-beginning</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><ins>All Commands</ins></strong><pre><code class="language-sh">    <span class="hljs-comment"># create a topic with 3 partitions</span>
+    <span class="hljs-comment"># If doesn&#x27;t exists or have 1 partition</span>
+    kafka-topics.sh --bootstrap-server [::1]:9092 --topic third_topic --create --partitions 3
+
+    <span class="hljs-comment"># start one consumer</span>
+    <span class="hljs-comment"># It will not read old messages</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic third_topic --group my-first-application
+
+    <span class="hljs-comment"># start one producer and start producing</span>
+    kafka-console-producer.sh --bootstrap-server [::1]:9092 --producer-property partitioner.class=org.apache.kafka.clients.producer.RoundRobinPartitioner --topic third_topic
+
+    <span class="hljs-comment"># start another consumer part of the same group. See messages being spread</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic third_topic --group my-first-application
+
+    <span class="hljs-comment"># start another consumer part of a different group from beginning</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic third_topic --group my-second-application --from-beginning
+</code></pre>
+</li>
+<li><strong><ins>References:</ins></strong>
+<ul>
+<li><a href="https://learn.conduktor.io/kafka/kafka-consumers-in-group-cli-tutorial/">https://learn.conduktor.io/kafka/kafka-consumers-in-group-cli-tutorial/</a></li>
+<li><a href="https://www.javatpoint.com/kafka-consumer-group-cli">https://www.javatpoint.com/kafka-consumer-group-cli</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="7-kafka-consumer-group-management-kafka-consumer-groupssh">7. Kafka consumer group management <em><a href="http://kafka-consumer-groups.sh">kafka-consumer-groups.sh</a></em></h2>
+<ul>
+<li><strong><ins>About / Introduction</ins></strong>
+<ul>
+<li>The Kafka Consumer Groups CLI kafka-consumer-groups is used to manage consumer groups in Kafka.</li>
+<li>This tool helps to list all consumer groups, describe a consumer group, delete consumer group info, or reset consumer group offsets.</li>
+<li>Generally, a Kafka consumer belongs to a particular consumer group. A consumer group basically represents the name of an application. In order to consume messages in a consumer group, '-group' command is used.</li>
+<li><strong>A typical kafka consumer groups</strong><center>
+  <img src="./images/kafka-consumer-groups-cli.png" alt="Kafka consumer groups CLI" title="Typical kafka consumer groups" width="600" height="270"/>
+</center>
+</li>
+</ul>
+</li>
+<li><strong><ins>Steps</ins></strong>
+<ul>
+<li><em><strong>Project Setup:</strong></em> <em>Zookeeper</em> and at least one <em>Kafka server</em> must be running.</li>
+<li><em><strong>Step-1:</strong></em> List all consumers groups
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-consumer-groups.sh">kafka-consumer-groups.sh</a> --bootstrap-server [::1]:9092 --list</em></li>
+</ul>
+</li>
+<li><em><strong>Step-2:</strong></em> Get details (describe) a group
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-consumer-groups.sh">kafka-consumer-groups.sh</a> --bootstrap-server [::1]:9092 --describe --group my-first-application</em></li>
+<li><strong>Response:</strong> <em>Note: Only one consumer is running.</em>
+<ul>
+<li><strong>LAG:</strong> Unread messages in topic.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-properties">    <span class="hljs-attr">GROUP</span>                <span class="hljs-string">TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG    CONSUMER-ID                                           HOST             CLIENT-ID</span>
+    <span class="hljs-attr">my-first-application</span> <span class="hljs-string">third_topic     2          13              15              2      console-consumer-5b341142-1f1a-4838-84e0-790690e71804 /0:0:0:0:0:0:0:1 console-consumer</span>
+    <span class="hljs-attr">my-first-application</span> <span class="hljs-string">third_topic     1          13              14              1      console-consumer-5b341142-1f1a-4838-84e0-790690e71804 /0:0:0:0:0:0:0:1 console-consumer</span>
+    <span class="hljs-attr">my-first-application</span> <span class="hljs-string">third_topic     0          13              15              2      console-consumer-5b341142-1f1a-4838-84e0-790690e71804 /0:0:0:0:0:0:0:1 console-consumer</span>
+</code></pre>
+</li>
+<li><em><strong>Step-3:</strong></em> Describe members of the group.
+<ul>
+<li><strong>Command:</strong> <em><a href="http://kafka-consumer-groups.sh">kafka-consumer-groups.sh</a> --bootstrap-server [::1]:9092 --describe --group my-first-application --members</em></li>
+<li><strong>Response:</strong></li>
+</ul>
+<pre><code class="language-properties">    <span class="hljs-attr">GROUP</span>                 <span class="hljs-string">CONSUMER-ID                                            HOST             CLIENT-ID        #PARTITIONS</span>
+    <span class="hljs-attr">my-first-application</span>  <span class="hljs-string">console-consumer-5b341142-1f1a-4838-84e0-790690e71804  /0:0:0:0:0:0:0:1 console-consumer 3</span>
+</code></pre>
+</li>
+<li><em><strong>Step-4</strong></em> Reset offset of a topic to the beginning. Ensure that <em>Consumers</em> are not running.
+<ul>
+<li><strong>Command (Dry Run):</strong> <em><a href="http://kafka-consumer-groups.sh">kafka-consumer-groups.sh</a> --bootstrap-server [::1]:9092 --group my-first-application --reset-offsets --to-earliest --topic third_topic --dry-run</em>
+<ul>
+<li><strong>Response:</strong></li>
+</ul>
+<pre><code class="language-properties">    <span class="hljs-attr">GROUP</span>                  <span class="hljs-string">TOPIC           PARTITION   NEW-OFFSET     </span>
+    <span class="hljs-attr">my-first-application</span>   <span class="hljs-string">third_topic     2           0              </span>
+    <span class="hljs-attr">my-first-application</span>   <span class="hljs-string">third_topic     1           0              </span>
+    <span class="hljs-attr">my-first-application</span>   <span class="hljs-string">third_topic     0           0            </span>
+</code></pre>
+</li>
+<li><strong>Command (Execute):</strong> <em><a href="http://kafka-consumer-groups.sh">kafka-consumer-groups.sh</a> --bootstrap-server [::1]:9092 --group my-first-application --reset-offsets --to-earliest --topic third_topic --execute</em>
+<ul>
+<li><strong>Response:</strong> <em>No consumers are connected,to demonstrate the LAG</em></li>
+</ul>
+<pre><code class="language-properties">    <span class="hljs-attr">GROUP</span>                 <span class="hljs-string">TOPIC         PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG   CONSUMER-ID   HOST  CLIENT-ID</span>
+    <span class="hljs-attr">my-first-application</span>  <span class="hljs-string">third_topic   2          0               16              16    -             -     -</span>
+    <span class="hljs-attr">my-first-application</span>  <span class="hljs-string">third_topic   1          0               15              15    -             -     -</span>
+    <span class="hljs-attr">my-first-application</span>  <span class="hljs-string">third_topic   0          0               15              15    -             -     -</span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><ins>Notes:</ins></strong>
+<ul>
+<li>Kafka provides lot more options to reset the offset, check documentation for more details.</li>
+<li>Here are some of flags for offset reset.
+<ul>
+<li><strong>--to-current:</strong> <em>Reset offsets to current offset.</em></li>
+<li><strong>--to-datetime &lt;String: datetime&gt;:</strong> <em>Reset offsets to offset from datetime. Format: 'YYYY-MM-DDTHH:mm:SS.sss'</em></li>
+<li><strong>--to-earliest:</strong> <em>Reset offsets to earliest offset.</em></li>
+<li><strong>--to-latest:</strong> <em>Reset offsets to latest offset.</em></li>
+<li><strong>--to-offset &lt;Long: offset&gt;:</strong> <em>Reset offsets to a specific offset.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><ins>All Commands:</ins></strong><pre><code class="language-sh">    <span class="hljs-comment"># documentation for the command </span>
+    kafka-consumer-groups.sh 
+
+    <span class="hljs-comment"># list consumer groups</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --list
+    
+    <span class="hljs-comment"># describe one specific group</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-second-application
+
+    <span class="hljs-comment"># describe another group</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-first-application
+
+    <span class="hljs-comment"># desriber members of the group</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-first-application --members
+
+    <span class="hljs-comment"># start a consumer</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic first_topic --group my-first-application
+
+    <span class="hljs-comment"># describe the group now</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-first-application
+
+    <span class="hljs-comment"># describe a console consumer group (change the end number)</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group console-consumer-10592
+
+    <span class="hljs-comment"># start a console consumer</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic first_topic --group my-first-application
+
+    <span class="hljs-comment"># describe the group again</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-first-application
+
+
+    <span class="hljs-comment">#############################</span>
+    <span class="hljs-comment">######  Reset offset   ######</span>
+    <span class="hljs-comment">#############################</span>
+
+    <span class="hljs-comment"># Dry Run: reset the offsets to the beginning of each partition</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --group my-first-application --reset-offsets --to-earliest --topic third_topic --dry-run
+
+    <span class="hljs-comment"># execute flag is needed</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --group my-first-application --reset-offsets --to-earliest --topic third_topic --execute
+
+    <span class="hljs-comment"># describe the consumer group again</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-first-application
+
+    <span class="hljs-comment"># consume from where the offsets have been reset</span>
+    kafka-console-consumer.sh --bootstrap-server [::1]:9092 --topic third_topic --group my-first-application
+
+    <span class="hljs-comment"># describe the group again</span>
+    kafka-consumer-groups.sh --bootstrap-server [::1]:9092 --describe --group my-first-application
+</code></pre>
+</li>
+<li><strong><ins>References:</ins></strong>
+<ul>
+<li><a href="https://www.javatpoint.com/kafka-consumer-group-cli">https://www.javatpoint.com/kafka-consumer-group-cli</a></li>
+<li><a href="https://learn.conduktor.io/kafka/kafka-consumer-group-management-cli-tutorial/">https://learn.conduktor.io/kafka/kafka-consumer-group-management-cli-tutorial/</a></li>
 </ul>
 </li>
 </ul>
