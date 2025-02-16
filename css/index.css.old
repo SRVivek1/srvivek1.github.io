@@ -47,15 +47,3 @@ tr:nth-child(even) {
 li {
     padding: 3px;
 }
-
-.box {
-    /* width: 100px;
-    height: 100px; */
-    /* background-color: lightblue; */
-    margin-bottom: 20px;
-    /* Adds space between divs */
-}
-
-.courses {
-    align-content: center;
-}

@@ -94,6 +94,7 @@
                         <ul>
                             <li><a href="https://github.com/EbookFoundation">EbookFoundation (Github.com)</a></li>
                             <li><a href="https://wiki.algo.is/All%20pages">Wiki for Algorithms</a></li>
+                            <li><a href="https://algs4.cs.princeton.edu/11model/">Algorithms (princeton.edu)</a></li>
                         </ul>
                     </td>
                 </tr>
@@ -105,14 +106,19 @@
                     <td></td>
                     <td>
                         <ul>
+                            <li><a href="./ds-algo/00-bitwise-operators.html">Bitwise Opertors [In progress]</a></li>
                             <li><a href="./ds-algo/01-ds-intro.html">Data Structure (DS) Intro</a></li>
                             <li><a href="./ds-algo/02-static-and-dynamic-arrays.html">Arrays and implementation</a></li>
                             <li><a href="./ds-algo/03-linked-list.html">LinkedList and implementation</a></li>
                             <li><a href="./ds-algo/04-stack-ds.html">Stack and implementation</a></li>
                             <li><a href="./ds-algo/05-queue-ds.html">Queue and implementation</a></li>
                             <li><a href="./ds-algo/06-dequeue-ds.md"><span style="color: red; font-style: italic;">Dequeue (Double Ended Queue) TODO</span></a></li>
+                            <li><a href="#"><span style="color: red; font-style: italic;">Blocking Queue TODO</span></a></li>
                             <li><a href="./ds-algo/07-heap-ds.html">Heap DS</a></li>
                             <li><a href="./ds-algo/08-priority-queue-ds.html">Priority Queue DS</a></li>
+                            <li><a href="./ds-algo/09-union-find-disjoint-set.html">UnionFind/Disjoint set DS</a></li>
+                            <li><a href="./ds-algo/10-binary-tree-ds.html">Tree Data Structure</a></li>
+                            <li><a href="./ds-algo/11-hash-table.html">Hash Table [In progress]</a></li>
                         </ul>
                     </td>
                 </tr>
