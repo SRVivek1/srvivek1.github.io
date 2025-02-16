@@ -53,6 +53,7 @@ li {
     height: 100px; */
     /* background-color: lightblue; */
     margin-bottom: 20px;
+    padding: auto;
     /* Adds space between divs */
 }
 
