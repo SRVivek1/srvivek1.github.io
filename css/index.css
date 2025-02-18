@@ -1,19 +1,26 @@
+body {
+    /* background-color:  rgba(208, 228, 247, 0.829); */
+}
+
 #body_wrapper {
-    background-color: rgba(252, 252, 252, 0.829);
+    /* background-color: rgb(229, 239, 247); */
     align-self: center;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: .5%;
+    margin-right: .5%;
+    margin-top: 0.5%;
 }
 
 #banner_heading {
     align-content: center;
-    text-align: center;
+    text-align: left;
+    font-size: 28px;
+    border-bottom: 4px solid #007bff;
 }
 
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 50%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -40,13 +47,37 @@ td {
     padding: 6px;
 }
 
-tr:nth-child(even) {
+/*Color alternate row.*/
+/* tr:nth-child(odd) {
     background-color: #dddddd;
+} */
+
+/*First row color*/
+tr:first-child {
+    background-color: #b0cdf3;
 }
 
-li {
-    padding: 3px;
+/* Fixed witdth for first column*/
+th:first-child,
+td:first-child {
+    width: 150px; /* Set a fixed width for the first column */
+    min-width: 150px;
+    max-width: 150px;
+    word-wrap: break-word; /* Ensures text wraps if needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+
+/* Style 1st columns from 2nd row onwards. */
+tr:not(:first-child) td:first-child {
+    background-color: rgb(209, 244, 250); /* Change to your preferred color */
+    font-weight: bold;
+}
+
+/* li {
+    padding: 3px;
+} */
 
 .box {
     /* width: 100px;
