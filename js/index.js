@@ -1,12 +1,29 @@
-function toggleTopic(id) {
-    var content = document.getElementById(id);
-    if (content.style.display === "none" || content.style.display === "") {
-        content.style.display = "block";
-    } else {
-        content.style.display = "none";
-    }
-}
+// Theme Switching
+document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.body.className = ''; // Reset classes
+        document.body.classList.add(btn.dataset.theme);
+    });
+});
 
-window.onload = function() {
-    document.getElementById('topic1-content').style.display = 'block';
-};
+// Expandable Topics
+document.querySelectorAll('.topic-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const subtopics = btn.nextElementSibling;
+        subtopics.style.display = subtopics.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+// Box Animation on Load
+document.addEventListener('DOMContentLoaded', () => {
+    const boxes = document.querySelectorAll('.content-box');
+    boxes.forEach((box, index) => {
+        box.style.opacity = '0';
+        box.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            box.style.transition = 'all 0.5s ease';
+            box.style.opacity = '1';
+            box.style.transform = 'translateY(0)';
+        }, index * 200);
+    });
+});
