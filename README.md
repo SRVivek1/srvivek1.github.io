@@ -24,3 +24,7 @@
 ## 📫 Connect with Me  
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/your-profile)  
 [![Portfolio](https://img.shields.io/badge/Website-181717?style=for-the-badge&logo=githubpages&logoColor=white)](https://srvivek1.github.io/)  
+
+
+![Profile Views](https://komarev.com/ghpvc/?username=srvivek1&color=blue)
+![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=srvivek1&theme=radical)
