@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="springboot.css" />
+    <title>QRH: SpringBoot & Spring Frameworks Tutorial</title>
+    <script>
+        function toggleTopic(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body onload="toggleTopic('topic1-content')">
+    <div class="left-panel">
+        <div class="topic-header" onclick="toggleTopic('topic1-content')">SpringBoot</div>
+        <div id="topic1-content" class="topic-content">
+            <a href="content1-1.html" target="content-frame">SpringBoot Basics</a>
+            <a href="content1-1.html" target="content-frame">SpringBoot Cloud</a>
+            <a href="content1-1.html" target="content-frame">Docker Introduction</a>
+            <a href="content1-1.html" target="content-frame">SpringBoot Docker</a>
+            <a href="content1-1.html" target="content-frame">SpringBoot Kubernetes</a>
+        </div>
+        <div class="topic-header" onclick="toggleTopic('topic2-content')">Topic 2</div>
+        <div id="topic2-content" class="topic-content">
+            <a href="content2-1.html" target="content-frame">Subtopic 2.1</a>
+            <a href="content2-2.html" target="content-frame">Subtopic 2.2</a>
+        </div>
+        <div class="topic-header" onclick="toggleTopic('topic3-content')">Topic 3</div>
+        <div id="topic3-content" class="topic-content">
+            <a href="content3-1.html" target="content-frame">Subtopic 3.1</a>
+            <a href="content3-2.html" target="content-frame">Subtopic 3.2</a>
+        </div>
+    </div>
+    <div class="middle-panel">
+        <iframe name="content-frame" src="default.html"></iframe>
+    </div>
+    <div class="right-panel">
+        <h3>Updates</h3>
+        <p>Latest news and updates here.</p>
+        <h3>Advertisements</h3>
+        <p>Ads and promotions go here.</p>
+    </div>
+</body>
+</html>
