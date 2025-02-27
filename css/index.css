@@ -35,6 +35,68 @@ body {
     border-bottom: 4px solid #007bff;
 }
 
+/* Navigation bar styling */
+.navbar {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.navbar .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 5px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 5px 12px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #4af574;
+    border-radius: 5px;
+}
+
+/* Responsive menu */
+@media screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .nav-links li {
+        margin: 5px 0;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        width: 100%;
+    }
+}
+/*End nav bar*/
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -99,7 +161,8 @@ ul {
     margin: 2px;
 }
 
-ul li::before {
+/* ul li::before { */
+.topics li::before {
     content: "➤ "; /* You can use ➜, ➝, ►, →, etc. */
     color: #007bff; /* Change arrow color */
     font-size: 1.2em; /* Adjust size */
