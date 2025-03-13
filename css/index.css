@@ -1,5 +1,6 @@
 body {
     /* background-color:  rgba(208, 228, 247, 0.829); */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #body_wrapper {
@@ -73,16 +74,16 @@ body {
 }
 
 /* Responsive menu */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 420px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .nav-links {
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
-        padding-top: 10px;
+        padding-top: 0px;
     }
 
     .nav-links li {
@@ -91,8 +92,8 @@ body {
 
     .nav-links a {
         display: block;
-        padding: 10px;
-        width: 100%;
+        font-size: 14px;
+        
     }
 }
 /*End nav bar*/
