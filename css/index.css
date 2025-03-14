@@ -22,8 +22,14 @@ body {
 .container div {
     border: 1px solid black;
     background-color: #f4f4f4;
-    box-shadow: 0 4px 8px rgb(159, 226, 231); /* Adding the shadow */
-    background-color: #fff; /* Optional: Set background color */
+    /* Adding the shadow  */
+    /* box-shadow: 0 4px 8px rgb(159, 226, 231);*/
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2), 
+                        -6px -6px 10px rgba(255, 255, 255, 1), 
+                        inset 4px 4px 8px rgba(255, 255, 255, 0.5),
+                        inset -4px -4px 8px rgba(71, 69, 47, 0.3);
+    /* Optional: Set background color */
+    /* background-color: #fff;  */
 
 }
 
@@ -179,8 +185,16 @@ tr:not(:first-child) td:first-child {
     height: 100px; */
     /* background-color: lightblue; */
     margin-bottom: 20px;
-    padding: auto;
     /* Adds space between divs */
+    border-radius: 10px;
+}
+
+/* Round the edges of table inside box*/
+.box table {
+    border-collapse: separate; /* Required for border-radius to work */
+    border-spacing: 0; /* Remove gaps between cells */
+    border-radius: 10px;
+    overflow: hidden; /* Ensures content doesn't overflow */
 }
 
 .courses {
