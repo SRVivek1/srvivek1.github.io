@@ -1,5 +1,6 @@
 .page-body {
   margin-top: 70px;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .banner-section {
@@ -13,10 +14,27 @@
 
 
 .navbar-nav .nav-item .nav-link:hover {
-  background-color: #0d6efd;
+  background-color: #059862;
   border-radius: 5px;
 }
 
 .vsr-nav-bg {
   background-color: #059862;
+}
+
+.dropdown-menu {
+    background-color: #059862; /* Dark background */
+}
+
+.dropdown-menu .dropdown-item {
+    color: white; /* White text */
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #0d6efd; /* Slightly lighter dark */
+}
+
+
+.main-about {
+  height: 450px;
 }
