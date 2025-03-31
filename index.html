@@ -54,16 +54,17 @@
     </script>
 </head>
 
-<body>
+<body class="page-body">
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div id="body-container">
+
         <header>
             <!-- Website banner-->
             <section id="banner" class="banner-section">
-                <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark text-white">
-                    <div class="container">
+                <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light text-white">
+                    <div class="container d-flex justify-content-between">
                         <a href="#" class="navbar-brand d-flex">
                             <img class="d-inline-block align-top" src="./assets/icons/laptop.svg" height="40"
                                 width="34" />
@@ -78,15 +79,15 @@
                         </button>
 
                         <div id="navbarNav" class="collapse navbar-collapse">
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav ms-auto">
                                 <li class="nav-item active">
                                     <a href="#" class="nav-link fw-bold active">Home</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a href="#" class="nav-link fw-bold">Github</a>
+                                    <a href="#" class="nav-link fw-bold active">Github</a>
                                 </li>
                                 <li class="nav-item active">
-                                    <a href="#" class="nav-link fw-bold">Linkedin</a>
+                                    <a href="#" class="nav-link fw-bold active">Linkedin</a>
                                 </li>
                             </ul>
                         </div>
@@ -97,6 +98,55 @@
             <!-- Navigation link-->
             <section id="navigation">
 
+
+                <div id="courseseNavbarNav" class="navbar navbar-dark navbar-expand-md vsr-nav-bg text-white">
+                    
+                    <!-- Toggle Button to expand and collapse the nav links -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#courseseNavbarNav" aria-controls="courseseNavbarNav" aria-expanded="false"
+                        aria-label="Toggle Courses Navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav w-100 d-flex justify-content-evenly">
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link fw-bold active dropdown-toggle" id="codingQuestionDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">Coding Questions</a>
+                                <ul class="dropdown-menu" aria-labelledby="codingQuestionDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Strings</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Integers</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Searching</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fw-bold active">Data Structure</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fw-bold active">Algorithms</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fw-bold active">Design Patterns</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fw-bold active">Interview Skills</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fw-bold active">Spring-Boot </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link fw-bold active">Streaming</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
         </header>
 
