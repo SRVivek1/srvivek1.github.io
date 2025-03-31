@@ -1,4 +1,6 @@
 .page-body {
+  /*Using font from boot strap*/
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   margin-top: 70px;
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
@@ -31,10 +33,9 @@
 }
 
 .dropdown-menu .dropdown-item:hover {
-    background-color: #0d6efd; /* Slightly lighter dark */
+    background-color: #3a3838; /* Slightly lighter dark */
 }
 
-
 .main-about {
-  height: 450px;
+  height: 500px;
 }
