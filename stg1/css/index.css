@@ -1,0 +1,45 @@
+.page-body {
+  /*Using font from boot strap*/
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  margin-top: 70px;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.banner-section {
+  background-color: #333;
+}
+
+.banner-heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: #059862;
+  border-radius: 5px;
+}
+
+.vsr-nav-bg {
+  background-color: #059862;
+}
+
+.dropdown-menu {
+    background-color: #059862; /* Dark background */
+}
+
+.dropdown-menu .dropdown-item {
+    color: white; /* White text */
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #3a3838; /* Slightly lighter dark */
+}
+
+.main-about {
+  height: 500px;
+}
+
+#courseseNavbarNav > .navbar-nav .nav-link:hover {
+  background-color: #3a3838;
+}
