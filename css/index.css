@@ -39,3 +39,7 @@
 .main-about {
   height: 500px;
 }
+
+#courseseNavbarNav > .navbar-nav .nav-link:hover {
+  background-color: #3a3838;
+}
