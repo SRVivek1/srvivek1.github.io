@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Pop&excl;OS Keboard Shortcuts</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="popos-keboard-shortcuts">Pop!OS Keboard Shortcuts</h1>
+<h2 id="terminal">Terminal</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Shortcut</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open Terminal</td>
+<td>WINDOWS + T</td>
+<td>Check for windows / Linux OS logo on keyboard.</td>
+</tr>
+<tr>
+<td>Open new tab</td>
+<td>CTRL + SHIFT + T</td>
+<td>Open new tab in terminal.</td>
+</tr>
+<tr>
+<td>Copy selected text</td>
+<td>CTRL + SHIFT + C</td>
+<td>Copy selected content to clipboard.</td>
+</tr>
+<tr>
+<td>Paste from clipboard</td>
+<td>CTRL + SHIFT + V</td>
+<td>Paste the copied content</td>
+</tr>
+<tr>
+<td>Open file</td>
+<td>open ./file_name &amp;</td>
+<td>Opens the file with default associated app</td>
+</tr>
+<tr>
+<td>Open file browser</td>
+<td>nautilus . &amp;</td>
+<td>Opens the wrking directory in file browser</td>
+</tr>
+<tr>
+<td>Create shortcuts</td>
+<td>ln -s /<source>/name /<target>/name</td>
+<td>Works for directories also</td>
+</tr>
+<tr>
+<td>Overwrite shortcuts</td>
+<td>ln -sf /<source>/name /<target>/name</td>
+<td>Works for directories also</td>
+</tr>
+<tr>
+<td>Search for files</td>
+<td>find ./path/to/file -type f -name '<em>file-name</em>'</td>
+<td>Check for all the file with provided name</td>
+</tr>
+<tr>
+<td>Search for directory</td>
+<td>find ./path/to/file -type d -name '<em>file-name</em>'</td>
+<td>Check for all the directory with provided name</td>
+</tr>
+<tr>
+<td>Search for text in all files</td>
+<td>find ./path/to/file -type f -name '<em>file-name</em>' -exec grep --color -Hi 'text-to-search' {} \;</td>
+<td>Check for provided text in all matching files.</td>
+</tr>
+<tr>
+<td>Search for text in a file</td>
+<td>grep --color -Hi 'text-to-search' *.txt</td>
+<td>Check for provided text in all matching files.</td>
+</tr>
+<tr>
+<td>Open app in background</td>
+<td>gedit /path/to/file.txt &amp;</td>
+<td>Open the file with gedit app in background process.</td>
+</tr>
+<tr>
+<td>Open app in background</td>
+<td>nohup gedit /path/to/file.txt &amp;</td>
+<td>Open the file in gedit app in background and logs app activity in nohup.out file.</td>
+</tr>
+<tr>
+<td>Verify file integrity</td>
+<td>cksum /path/to/file</td>
+<td>Shows CRC checksum of file.</td>
+</tr>
+<tr>
+<td>Check open port</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Check running process</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Kill running process</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Update Specific app</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Inspect system boot</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="maven">Maven</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Shortcut</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Refresh as maven project</td>
+<td>mvn eclipse:clean eclipse:eclipse</td>
+<td>Refresh project and fix resource required for maven prorject.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<center>
+<h1> ------ End ------ </h1>
+</center>
+<!-- HTML styling -->
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+body {
+    
+}
+</style>
+
+            
+            
+        </body>
+        </html>
