@@ -18,7 +18,8 @@
 }
 
 </style>
-            
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
 <style>
@@ -196,13 +197,13 @@
 </tr>
 <tr>
 <td>Create shortcuts</td>
-<td>ln -s /<source>/name /<target>/name</td>
-<td>Works for directories also</td>
+<td>ln -s /path/to/source /path/to/target</td>
+<td>Works for directories as well.</td>
 </tr>
 <tr>
 <td>Overwrite shortcuts</td>
-<td>ln -sf /<source>/name /<target>/name</td>
-<td>Works for directories also</td>
+<td>ln -sf /path/to/source /path/to/target</td>
+<td>Works for directories as well.</td>
 </tr>
 <tr>
 <td>Search for files</td>
@@ -250,6 +251,11 @@
 <td>Shows SHA-256 checksum of file.</td>
 </tr>
 <tr>
+<td>Check installation date</td>
+<td>1. df -h / </br> 2. sudo tune2fs -l ${Filesystem}</td>
+<td>${Filesystem} is 1st cmd output.</td>
+</tr>
+<tr>
 <td>Check open port</td>
 <td></td>
 <td></td>
@@ -292,6 +298,21 @@
 <td>mvn eclipse:clean eclipse:eclipse</td>
 <td>Refresh project and fix resource required for maven prorject.</td>
 </tr>
+<tr>
+<td>Build compile</td>
+<td>mvn clean compile</td>
+<td>Only compiles the code</td>
+</tr>
+<tr>
+<td>Build resource</td>
+<td>mvn clean install</td>
+<td>Compile and generate resource.</td>
+</tr>
+<tr>
+<td>Skip jUnit</td>
+<td>mvn clean install -DskipTest=true</td>
+<td>Skip jUnit tests cases.</td>
+</tr>
 </tbody>
 </table>
 <hr>
@@ -310,7 +331,7 @@ body {
 }
 </style>
 
-            
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             
         </body>
         </html>
