@@ -196,6 +196,16 @@
 <td>Opens the wrking directory in file browser</td>
 </tr>
 <tr>
+<td>Size of file/directory</td>
+<td>du -hs /path/to/dir</td>
+<td>Shows size of file or directory</td>
+</tr>
+<tr>
+<td>Disk usages</td>
+<td>df -h</td>
+<td>Shows disk usages by system.</td>
+</tr>
+<tr>
 <td>Create shortcuts</td>
 <td>ln -s /path/to/source /path/to/target</td>
 <td>Works for directories as well.</td>
@@ -204,26 +214,6 @@
 <td>Overwrite shortcuts</td>
 <td>ln -sf /path/to/source /path/to/target</td>
 <td>Works for directories as well.</td>
-</tr>
-<tr>
-<td>Search for files</td>
-<td>find ./path/to/file -type f -name '<em>file-name</em>'</td>
-<td>List all file with provided name.</td>
-</tr>
-<tr>
-<td>Search for directory</td>
-<td>find ./path/to/file -type d -name '<em>file-name</em>'</td>
-<td>List all directory with provided name.</td>
-</tr>
-<tr>
-<td>Search for text in all files</td>
-<td>find ./path/to/file -type f -name '<em>file-name</em>' -exec grep --color -Hi 'text-to-search' {} \;</td>
-<td>Check for provided text in all matching files.</td>
-</tr>
-<tr>
-<td>Search for text in a file</td>
-<td>grep --color -Hi 'text-to-search' *.txt</td>
-<td>List all matches in all matching files.</td>
 </tr>
 <tr>
 <td>Open app in background</td>
@@ -279,6 +269,92 @@
 <td>Inspect system boot</td>
 <td></td>
 <td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="find--searching-files-and-directories">Find : Searching files and directories</h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Shortcut</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search for files</td>
+<td>find ./path/to/file -type f -name '<em>file-name</em>'</td>
+<td>List all file with provided name.</td>
+</tr>
+<tr>
+<td>Search for directory</td>
+<td>find ./path/to/file -type d -name '<em>file-name</em>'</td>
+<td>List all directory with provided name.</td>
+</tr>
+<tr>
+<td>Search files with multiple names/patterns</td>
+<td>find /path/to/search -type f ( -name &quot;pattern1&quot; -o -name &quot;pattern2&quot; -o -name &quot;pattern3&quot; ) -print</td>
+<td>List files matching any of the names.</td>
+</tr>
+<tr>
+<td>Search files with multiple names/patterns case insensitive.</td>
+<td>find /path/to/search -type f ( -iname &quot;pattern1&quot; -o -iname &quot;pattern2&quot; -o -iname &quot;pattern3&quot; ) -print</td>
+<td>List files matching any of the names case insensitive.</td>
+</tr>
+<tr>
+<td>Search files on multiple paths</td>
+<td>find /path/to/location1 /path/to/location2 /path/to/location3 ... -type f ( -iname &quot;pattern1&quot; -o -iname &quot;pattern2&quot; ) -print</td>
+<td>Only search in given paths for files.</td>
+</tr>
+<tr>
+<td>Search for text/patterns in all files</td>
+<td>find ./path/to/file -type f -name '<em>file-name</em>' -exec grep --color -Hi 'text-to-search' {} \;</td>
+<td>Check for provided texts/patterns in all matching files.</td>
+</tr>
+<tr>
+<td>Search for multiple text/patterns in all files</td>
+<td>find /path/to/search -type f -name '<em>file-name</em>' -exec grep --color -Hi -e &quot;pattern1&quot; -e &quot;pattern2&quot; -e &quot;pattern3&quot; {} \;</td>
+<td>Check for provided all texts/patterns in all matching files.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="grep--check-for-text-patterns-in-files">Grep : Check for text patterns in files</h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Shortcut</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search for text in all files</td>
+<td>grep --color &quot;text pattern&quot; .</td>
+<td>Searches all files in current directory for text pattern.</td>
+</tr>
+<tr>
+<td>Search in all .txt files</td>
+<td>grep --color 'text-to-search' *.txt</td>
+<td>List all matches in all matching files.</td>
+</tr>
+<tr>
+<td>Ignore case while searching</td>
+<td>grep --color -i 'text-to-search' *.txt</td>
+<td>Show all matches in upper and lower cases.</td>
+</tr>
+<tr>
+<td>Show file names if match found.</td>
+<td>grep --color -H 'text-to-search' *.txt</td>
+<td>Show all matches with file names.</td>
+</tr>
+<tr>
+<td>Search all files recursively</td>
+<td>grep --color &quot;text pattern&quot; . -r</td>
+<td>Searches all files and subdirectories in current directory for text pattern.</td>
 </tr>
 </tbody>
 </table>
