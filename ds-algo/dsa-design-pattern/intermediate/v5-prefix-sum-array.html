@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Prefix Sum Array</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="prefix-sum-array">Prefix Sum Array</h1>
+<h2 id="concept-overview">Concept Overview</h2>
+<ul>
+<li>A prefix sum array, also known as a cumulative sum array, is a data structure used for efficient computation of the sum of elements within a given range of an array.</li>
+<li>From an architect's perspective, it's a fundamental optimization technique that trades space for time.</li>
+<li>By pre-calculating and storing the cumulative sums, we can answer multiple range sum queries in constant time, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>, <em><strong>after an initial linear-time pre-computation</strong></em>.</li>
+</ul>
+<br/>
+<h2 id="detailed-explanation">Detailed Explanation</h2>
+<ul>
+<li>
+<p><strong>The core idea is simple:</strong></p>
+<ul>
+<li>
+<p>We create a new array, let's call it prefix_sum, where prefix_sum[i] stores the sum of all elements from the beginning of the original array up to index i.</p>
+</li>
+<li>
+<p>Let the original array be arr of size n.</p>
+<ul>
+<li>The prefix sum array, prefix_sum, will also be of size n (or n+1 for easier indexing).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Pre-computation:</strong></p>
+<ul>
+<li>The prefix_sum array is built iteratively:
+<ul>
+<li>prefix_sum[0] = arr[0]</li>
+<li>prefix_sum[i] = prefix_sum[i-1] + arr[i] for i &gt; 0.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Range Sum Query:</strong></p>
+<ul>
+<li>
+<p>To find the sum of elements from index i to j (inclusive) in the original array, we use the pre-computed values: <em><strong>sum(i, j) = prefix_sum[j] - prefix_sum[i-1]</strong></em>, (assuming prefix_sum[-1] = 0).</p>
+<ul>
+<li>This works because prefix_sum[j] contains the sum from index 0 to j, and prefix_sum[i-1] contains the sum from 0 to i-1.</li>
+<li>Subtracting the latter from the former leaves the sum of elements from i to j.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="code-examples">Code Examples</h2>
+<pre><code class="language-java">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PrefixSumExample</span> {
+
+        <span class="hljs-comment">// Method to build the prefix sum array</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] buildPrefixSumArray(<span class="hljs-type">int</span>[] arr) {
+            <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;
+            <span class="hljs-type">int</span>[] prefixSum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];
+            <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">0</span>) {
+                prefixSum[<span class="hljs-number">0</span>] = arr[<span class="hljs-number">0</span>];
+                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) {
+                    prefixSum[i] = prefixSum[i - <span class="hljs-number">1</span>] + arr[i];
+                }
+            }
+            <span class="hljs-keyword">return</span> prefixSum;
+        }
+
+        <span class="hljs-comment">// Method to get sum of elements from index i to j</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRangeSum</span><span class="hljs-params">(<span class="hljs-type">int</span>[] prefixSum, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> {
+            <span class="hljs-keyword">if</span> (i &gt; j || i &lt; <span class="hljs-number">0</span> || j &gt;= prefixSum.length) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Invalid range.&quot;</span>);
+            }
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>) {
+                <span class="hljs-keyword">return</span> prefixSum[j];
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">return</span> prefixSum[j] - prefixSum[i - <span class="hljs-number">1</span>];
+            }
+        }
+
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> {
+            <span class="hljs-type">int</span>[] arr = {<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>};
+            
+            <span class="hljs-comment">// 1. Build prefix sum array</span>
+            <span class="hljs-type">int</span>[] prefixSum = buildPrefixSumArray(arr);
+            <span class="hljs-comment">// prefixSum will be {10, 30, 60, 100, 150}</span>
+            
+            System.out.println(<span class="hljs-string">&quot;Original array: &quot;</span> + java.util.Arrays.toString(arr));
+            System.out.println(<span class="hljs-string">&quot;Prefix sum array: &quot;</span> + java.util.Arrays.toString(prefixSum));
+            
+            <span class="hljs-comment">// 2. Query for a range sum</span>
+            <span class="hljs-type">int</span> <span class="hljs-variable">startIdx</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+            <span class="hljs-type">int</span> <span class="hljs-variable">endIdx</span> <span class="hljs-operator">=</span> <span class="hljs-number">3</span>;
+            <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> getRangeSum(prefixSum, startIdx, endIdx); <span class="hljs-comment">// Sum of {20, 30, 40}</span>
+            System.out.println(<span class="hljs-string">&quot;Sum from index &quot;</span> + startIdx + <span class="hljs-string">&quot; to &quot;</span> + endIdx + <span class="hljs-string">&quot;: &quot;</span> + sum); <span class="hljs-comment">// Output: 90</span>
+        }
+    }
+</code></pre>
+<br/>
+<h2 id="diagrams">Diagrams</h2>
+<ul>
+<li>A simple, textual representation is effective.
+<ul>
+<li>
+<p>Original Array:</p>
+<ul>
+<li>[A, B, C, D, E]</li>
+</ul>
+</li>
+<li>
+<p>Prefix Sum Array:</p>
+<ul>
+<li>P[0] = A</li>
+<li>P[1] = A + B</li>
+<li>P[2] = A + B + C</li>
+<li>P[3] = A + B + C + D</li>
+<li>P[4] = A + B + C + D + E</li>
+</ul>
+</li>
+<li>
+<p>Sum of elements from index i to j:</p>
+<ul>
+<li>Sum(i, j) = P[j] - P[i-1]</li>
+<li><strong>Examples:</strong>
+<ul>
+<li>For Sum(1, 3) (elements B, C, D):</li>
+<li>Sum(1, 3) = P[3] - P[0]</li>
+<li>Sum(1, 3) = (A + B + C + D) - (A)</li>
+<li>Sum(1, 3) = B + C + D</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="example">Example:</h2>
+<ul>
+<li>Calculating prefix sum array.
+<ul>
+<li><em><strong>Formula:</strong></em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>f</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><mi>p</mi><mi>f</mi><mo stretchy="false">[</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo><mo>+</mo><mi>a</mi><mi>r</mi><mi>r</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">pf[i] = pf[i - 1] + arr[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">rr</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mclose">]</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Array Data:</th>
+<th>-3</th>
+<th>6</th>
+<th>2</th>
+<th>4</th>
+<th>5</th>
+<th>2</th>
+<th>8</th>
+<th>-9</th>
+<th>3</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Index:</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td><strong>Prefix-Sum Array:</strong></td>
+<td>-3</td>
+<td>3</td>
+<td>5</td>
+<td>9</td>
+<td>14</td>
+<td>16</td>
+<td>24</td>
+<td>15</td>
+<td>18</td>
+<td>19</td>
+</tr>
+</tbody>
+</table>
+<br/>
+<ul>
+<li><strong>Edge case:</strong>
+<ul>
+<li>For index value of <strong>0</strong>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>f</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mo>=</mo><mi>a</mi><mi>r</mi><mi>r</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">pf[0] = arr[0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">rr</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="real-world-applications">Real-World Applications</h2>
+<ul>
+<li>
+<p><strong>Financial Data Analysis:</strong></p>
+<ul>
+<li>For calculating the sum of transactions over a specific time period. Instead of re-summing every time, you can query a pre-computed cumulative sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Image Processing:</strong></p>
+<ul>
+<li>Used in 2D prefix sums (also known as a summed-area table) to quickly calculate the sum of pixel values within a rectangular region of an image.</li>
+<li>This is a core component of algorithms like the <em><strong>Viola-Jones object detection framework</strong></em>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Warehousing/Analytics:</strong></p>
+<ul>
+<li>In scenarios with a high volume of read queries on static data, a pre-computed prefix sum can significantly accelerate reporting and dashboard generation.</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="advantages--drawbacks">Advantages &amp; Drawbacks</h2>
+<ul>
+<li><strong>Advantages:</strong>
+<ul>
+<li><strong>O(1) Time Complexity for Queries:</strong>
+<ul>
+<li>After the initial setup, any range sum query is incredibly fast.</li>
+</ul>
+</li>
+<li><strong>Simplicity:</strong>
+<ul>
+<li>The concept is easy to understand and implement.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<ul>
+<li><strong>Drawbacks:</strong>
+<ul>
+<li><strong>O(N) Space Complexity:</strong>
+<ul>
+<li>Requires an additional array of the same size as the original, which doubles the space requirement.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Static Data Requirement:</strong>
+<ul>
+<li>It's not efficient for arrays that undergo frequent updates.</li>
+<li>Any change to an element arr[i] requires re-calculating the prefix sums for all indices from i to the end, which is an O(N) operation.</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="trade-offs">Trade-offs</h2>
+<ul>
+<li>The core trade-off is Space vs. Time.
+<ul>
+<li>
+<p><strong>Prefix Sum:</strong></p>
+<ul>
+<li>High space (O(N)) for low time (O(1)) per query. Best for many queries on a static dataset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Brute-Force Summation:</strong></p>
+<ul>
+<li>Low space (O(1)) but high time (O(N)) per query.</li>
+<li>Best for few queries or a frequently updated dataset.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<ul>
+<li>Other <em><strong>alternatives</strong></em> include more complex data structures like a <em><strong>Segment Tree</strong></em> or a <em><strong>Fenwick Tree (Binary Indexed Tree)</strong></em>.</li>
+<li>These structures offer a better balance, providing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(logN)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span> <strong>time</strong> for both range queries and updates.
+However, they are more complex to implement.</li>
+</ul>
+<br/>
+<h2 id="best-practices">Best Practices</h2>
+<ul>
+<li>
+<p>Use prefix sums when you have a large number of range sum queries on an array that is static or infrequently updated.</p>
+</li>
+<li>
+<p>Consider using an <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> size array for the prefix sum to simplify the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">i=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span> case, where the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>r</mi><mi>e</mi><mi>f</mi><mi>i</mi><mi>x</mi><mi>S</mi><mi>u</mi><mi>m</mi><mo stretchy="false">[</mo><mi>j</mi><mo stretchy="false">]</mo><mo>−</mo><mi>p</mi><mi>r</mi><mi>e</mi><mi>f</mi><mi>i</mi><mi>x</mi><mi>S</mi><mi>u</mi><mi>m</mi><mo stretchy="false">[</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">prefixSum[j] - prefixSum[i-1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">x</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mopen">[</span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> formula still holds by assuming prefixSum[-1] = 0.</p>
+</li>
+<li>
+<p>For 2D matrices, pre-computing a 2D prefix sum array is a common practice to answer queries on rectangular regions.</p>
+</li>
+</ul>
+<br/>
+<h2 id="interview-angle">Interview Angle</h2>
+<ul>
+<li><strong>Possible Questions:</strong>
+<ul>
+<li>How would you find the sum of elements in a range [i, j] of an array?
+<ul>
+<li><em><strong>Note:</strong></em> Start with brute-force, then introduce prefix sum as an optimization.</li>
+</ul>
+</li>
+<li>What are the time and space complexities of a prefix sum array? What is its main drawback?&quot;</li>
+<li>When would you choose a prefix sum array over a brute-force approach?&quot;</li>
+<li>What if the array is frequently updated? What data structure would you use then?
+<ul>
+<li><em><strong>Note:</strong></em> This is a classic follow-up that leads to <em>Segment Trees</em> or <em>Fenwick Trees</em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br/>
+<ul>
+<li><strong>How to Answer:</strong>
+<ul>
+<li>Start by defining the problem and the simple, brute-force solution (looping from i to j). State its complexity (O(N)).</li>
+<li>Introduce the prefix sum as an optimization for scenarios with multiple queries. Clearly explain the pre-computation step and the formula for queries.</li>
+<li>Be ready to discuss the trade-offs and when it's appropriate. The ability to compare different solutions (brute-force vs. prefix sum vs. segment tree) demonstrates a deeper architectural understanding.</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="online-references">Online References</h2>
+<ul>
+<li>
+<p><strong>GeeksforGeeks - Prefix Sum Array:</strong></p>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/prefix-sum-array-implementation-in-java/">https://www.geeksforgeeks.org/prefix-sum-array-implementation-in-java/</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Khan Academy - Prefix Sums:</strong></p>
+<ul>
+<li><a href="https://www.khanacademy.org/computing/computer-science/algorithms/prefix-sums/a/prefix-sums-and-range-queries">https://www.khanacademy.org/computing/computer-science/algorithms/prefix-sums/a/prefix-sums-and-range-queries</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Wikipedia - Prefix Sum:</strong></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Prefix_sum">https://en.wikipedia.org/wiki/Prefix_sum</a></li>
+</ul>
+</li>
+</ul>
+<br/> 
+<h2 id="summary">Summary</h2>
+<ul>
+<li>A prefix sum array is an elegant data structure that pre-computes the cumulative sums of an array.</li>
+<li>This allows for constant-time, O(1), range sum queries at the cost of O(N) space and a one-time O(N) pre-computation.</li>
+<li>It's an excellent technique for optimizing applications with numerous queries on static data.</li>
+</ul>
+<br/> 
+<h2 id="extra-insights">Extra Insights</h2>
+<ul>
+<li><strong>Analogy:</strong>
+<ul>
+<li>Think of a running bank balance.  The prefix_sum[i] is your bank balance at the end of day i.
+<ul>
+<li>To find out how much you spent between day i and j (inclusive), you just look at the balances: balance at day j - balance at day (i-1).</li>
+<li>You don't need to re-add every transaction from day i to j individually.</li>
+<li>This analogy perfectly captures the essence of a prefix sum. It's a fundamental building block, a low-level optimization that can have a significant impact when applied correctly.</li>
+<li>It's also the basis for more advanced data structures like the Fenwick Tree.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><a href="https://srvivek1.github.io/">Go to Home</a></p>
+<h3 align="center"> ------- End -------</h3>
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
