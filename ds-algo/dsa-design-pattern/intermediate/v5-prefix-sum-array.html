@@ -335,6 +335,11 @@
 <li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>f</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mo>=</mo><mi>a</mi><mi>r</mi><mi>r</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">pf[0] = arr[0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">rr</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span></span></span></span></li>
 </ul>
 </li>
+<li>For sum from index '0' to 'k'
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>u</mi><mi>m</mi><mo>=</mo><mi>p</mi><mi>f</mi><mo stretchy="false">[</mo><mi>k</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">sum = pf[k]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">u</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">]</span></span></span></span></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -464,6 +469,31 @@ However, they are more complex to implement.</li>
 <li>Start by defining the problem and the simple, brute-force solution (looping from i to j). State its complexity (O(N)).</li>
 <li>Introduce the prefix sum as an optimization for scenarios with multiple queries. Clearly explain the pre-computation step and the formula for queries.</li>
 <li>Be ready to discuss the trade-offs and when it's appropriate. The ability to compare different solutions (brute-force vs. prefix sum vs. segment tree) demonstrates a deeper architectural understanding.</li>
+</ul>
+</li>
+</ul>
+<br/>
+<h2 id="coding-problems">Coding problems</h2>
+<ul>
+<li><strong>Q1.</strong> Find sum of all values between gien indexes (startIndex,endIndex) inclusive.</li>
+<li><strong>Q2.</strong> Find Equilibrium index in given array</li>
+<li><strong>Q3.</strong> Find all Equilibrium indexs in given array
+<ul>
+<li>Asked in:
+<ul>
+<li><em><strong>DirectI</strong></em> &amp; <em><strong>Flipkrt</strong></em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Q4.</strong> Given an array of integers, count the number of special indexes. Where a special index is defined as, after removing that index, it satisfies below equation, in the resulting array where the special index is removed.
+<ul>
+<li><em><strong>Special Index</strong></em> ==&gt; <em>Sum of all Odd Index elements</em> == <em>Sum of all even index elements</em>.</li>
+<li>Asked in:
+<ul>
+<li><em><strong>Amazon</strong></em>, <em><strong>Google</strong></em>, <em><strong>Microsoft</strong></em>, <em><strong>Adobe</strong></em>, <em><strong>DirectI</strong></em> &amp; <em><strong>Codenation</strong></em>.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
